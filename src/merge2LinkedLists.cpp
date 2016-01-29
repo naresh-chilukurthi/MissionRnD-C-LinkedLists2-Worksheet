@@ -18,6 +18,58 @@ struct node {
 	struct node *next;
 };
 
-struct node * merge2LinkedLists(struct node *head1, struct node *head2) {
+struct node * merge2LinkedLists(struct node *p, struct node *q) {
+	if(p==NULL&&q==NULL)
 	return NULL;
+	else
+    {
+        struct node *start,*temp;
+        if(p==NULL)
+            return q;
+        else if(q==NULL)
+            return p;
+        else
+        {
+            if(p->num<q->num)
+            {
+                start=p;p=p->next;
+            }
+            else
+            {
+                start=q;
+                q=q->next;
+            }
+
+            temp=start;
+            while(p!=NULL&&q!=NULL)
+            {   //printf("p:%d q:%d\n",p->num,q->num);
+                if((p->num)<(q->num))
+                {
+                    temp->next=p;
+                    temp=temp->next;
+                    p=p->next;
+                }
+                else
+                {
+                    //  printf("in q");
+                    temp->next=q;
+                    temp=temp->next;
+                    q=q->next;
+                }
+                //printf("%d",temp->num);
+            }
+            if(p==NULL&q!=NULL)
+            {
+                temp->next=q;
+            }
+            else if(p!=NULL&&q==NULL)
+            {
+                temp->next=p;
+            }
+            temp=start;
+
+            return start;
+    }
 }
+}
+
